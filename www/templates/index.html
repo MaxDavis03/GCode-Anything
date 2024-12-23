@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Uploader & Position Monitor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1, h2 {
+            color: #0248b8;
+        }
+        #positionDisplay {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Current Position</h1>
+<div id="positionDisplay">
+    <p><strong>X Position:</strong> <span id="xPosition">0.00</span> mm</p>
+    <p><strong>Z Position:</strong> <span id="zPosition">0.00</span> mm</p>
+</div>
+
+<h2>Live Camera Feed</h2>
+<div>
+    <img src="/camera_feed" alt="Live camera feed" style="max-width: 100%; border: 1px solid #ccc;">
+</div>
+
+
+
+<h3>Upload File to Milk-V SD Card</h3>
+<form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" id="fileInput" name="file" required>
+    <button type="button" onclick="uploadFile()">Upload</button>
+</form>
+<div id="uploadStatus"></div>
+<div id="disk-usage">
+    <strong>Disk Usage:</strong> Loading...
+</div>
+
+<script>
+
+    // Function to fetch and display position data
+    function updatePosition() {
+        fetch('/position')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('xPosition').innerText = data.x_position.toFixed(2);
+            document.getElementById('zPosition').innerText = data.z_position.toFixed(2);
+        })
+        .catch(error => console.error('Error fetching position data:', error));
+    }
+
+    // Update position every 2 seconds
+    setInterval(updatePosition, 2000);
+
+
+    // Function to handle file upload
+    function uploadFile() {
+        const fileInput = document.getElementById('fileInput');
+        const file = fileInput.files[0];
+
+        if (!file) {
+            alert('Please select a file to upload.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        fetch('/upload', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('uploadStatus').innerText = data;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('uploadStatus').innerText = 'Upload failed.';
+        });
+    }
+
+      // Function to handle disk usage utility
+    async function fetchDiskUsage() {
+            try {
+                const response = await fetch('/disk-usage');
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('disk-usage').innerHTML = `
+                        <strong>Disk Usage:</strong> ${data.used} MB used of ${data.total} MB
+                        (${data.percent_used}% utilized)
+                    `;
+                } else {
+                    document.getElementById('disk-usage').innerHTML = 'Failed to load disk usage data.';
+                }
+            } catch (error) {
+                console.error('Error fetching disk usage:', error);
+                document.getElementById('disk-usage').innerHTML = 'Error loading disk usage data.';
+            }
+        }
+
+        // Fetch disk usage on page load and every 60 seconds
+        fetchDiskUsage();
+        setInterval(fetchDiskUsage, 60000);
+
+
+</script>
+
+</body>
+</html>
+
