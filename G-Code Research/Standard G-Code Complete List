@@ -1,0 +1,42 @@
+
+G-CODE REFERENCE MANUAL
+
+The following information has been obtained from Hellman CNC company. Credit: https://www.helmancnc.com/g-code/
+
+
+Contents
+1. Complete G Code List
+    List of G-codes commonly found on Fanuc and similarly designed CNC controls
+  G00 Positioning (Rapid traverse)
+  G01 Linear interpolation (Cutting feed)
+  G02 Circular interpolation CW or helical interpolation CW
+  G03 Circular interpolation CCW or helical interpolation CCW
+  G04 Dwell
+  G10 Programmable data input
+  G20 Input in inch
+  G21 Input in mm
+  G32 Thread cutting
+    G32 Taper Threading
+  G33 Thread Cutting
+  G70 Finishing cycle
+  G71 Stock removal in turning
+  G72 Stock removal in facing
+  G73 Pattern repeating
+  G74 End face peck drilling
+    G74 Peck Drilling Cycle
+    G74 Face Grooving
+  G75 Outer diameter/internal diameter drilling
+  G76 Multiple threading cycle
+    G76 Threading Cycle One Line Format
+    G76 Taper Threading
+    G76 Multi Start Threading
+    G76 Thread Infeed
+  G92 Thread cutting cycle
+    G92 Taper Threading Cycle
+  G94 Facing Cycle (Endface turning cycle)
+  G94 Feed Per Minute / G98 Feed Per Minute
+  G95 Feed Per Revolution / G99 Feed Per Revolution
+
+
+1. Complete G Code List
+
