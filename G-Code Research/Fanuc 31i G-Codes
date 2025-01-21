@@ -1,0 +1,101 @@
+Fanuc 31i Machining Center G-CODE REFERENCE MANUAL
+
+The following information has been obtained from Hellman CNC company. Credit: https://www.helmancnc.com/fanuc-31i-g-codes-machining-center-fanuc-30i-31i-32i/
+
+Following list of g codes applies to following cnc controls as well:
+Fanuc Series 30i/300i/300is-MODEL A
+Fanuc Series 31i/310i/310is-MODEL A5
+Fanuc Series 31i/310i/310is-MODEL A
+Fanuc Series 32i/320i/320is-MODEL A
+
+
++-----------------------+-------+------------------------------------------+
+|         G-Code        |       |                                          |
++-------+-------+-------| Group | Function                                 |
+|   A   |   B   |   C   |       |                                          |
++-------+-------+-------+-------+------------------------------------------+
+|  G00  |  G00  |  G00  |  01   | Positioning (Rapid traverse)             |
+|  G01  |  G01  |  G01  |  01   | Linear interpolation (Cutting feed)      |
+|  G02  |  G02  |  G02  |  01   | Circular interpolation CW or helical     |
+|       |       |       |       | interpolation CW                         |
+|  G03  |  G03  |  G03  |  01   | Circular interpolation CCW or helical    |
+|       |       |       |       | interpolation CCW                        |
+|  G04  |  G04  |  G04  |  00   | Dwell                                    |
+| G07.1 | G07.1 | G07.1 |  00   | Cylindrical interpolation                |
+| (G107)| (G107)| (G107)|       |                                          |
+|  G08  |  G08  |  G08  |  00   | Advanced preview control                 |
+|  G10  |  G10  |  G10  |  00   | Programmable data input                  |
+|  G11  |  G11  |  G11  |  00   | Programmable data input cancel           |
+| G12.1 | G12.1 | G12.1 |  00   | Polar coordinate interpolation mode      |
+| (G112)| (G112)| (G112)|       |                                          |
+| G13.1 | G13.1 | G13.1 |  00   | Polar coordinate interpolation cancel    |
+| (G113)| (G113)| (G113)|       | mode                                     |
+|  G17  |  G17  |  G17  |  16   | X Y plane selection                      |
+|  G18  |  G18  |  G18  |  16   | Z X plane selection                      |
+|  G19  |  G19  |  G19  |  16   | Y Z plane selection                      |
+|  G20  |  G20  |  G70  |  06   | Input in inch                            |
+|  G21  |  G21  |  G71  |  06   | Input in mm                              |
+|  G22  |  G22  |  G22  |  09   | Stored stroke check function on          |
+|  G23  |  G23  |  G23  |  09   | Stored stroke check function off         |
+|  G25  |  G25  |  G25  |  08   | Spindle speed fluctuation detection off  |
+|  G26  |  G26  |  G26  |  08   | Spindle speed fluctuation detection on   |
+|  G27  |  G27  |  G27  |  00   | Reference position return check          |
+|  G28  |  G28  |  G28  |  00   | Return to reference position             |
+|  G30  |  G30  |  G30  |  00   | 2nd, 3rd and 4th reference position      |
+|       |       |       |       | return                                   |
+|  G31  |  G31  |  G31  |  00   | Skip function                            |
+|  G32  |  G33  |  G33  |  01   | Thread cutting                           |
+|  G34  |  G34  |  G34  |  01   | Variable—lead thread cutting             |
+|  G36  |  G36  |  G36  |  00   | Automatic tool compensation X            |
+|  G37  |  G37  |  G37  |  00   | Automatic tool compensation Z            |
+|  G40  |  G40  |  G40  |  07   | Tool nose radius compensation cancel     |
+|  G41  |  G41  |  G41  |  07   | Tool nose radius compensation left       |
+|  G42  |  G42  |  G42  |  07   | Tool nose radius compensation right      |
+|  G50  |  G92  |  G92  |  00   | Coordinate system setting or max.        |
+|       |       |       |       | spindle speed setting                    |
+| G50.3 | G92.1 | G92.1 |  00   | Workpiece coordinate system preset       |
+| G50.2 | G50.2 | G50.2 |  20   | Polygonal turning cancel                 |
+| (G250)| (G250)| (G250)|       |                                          |
+| G51.2 | G51.2 | G51.2 |  20   | Polygonal turning                        |
+| (G251)| (G251)| (G251)|       |                                          |
+|  G52  |  G52  |  G52  |  00   | Local coordinate system setting          |
+|  G53  |  G53  |  G53  |  00   | Machine coordinate system setting        |
+|  G54  |  G54  |  G54  |  14   | Workpiece coordinate system 1 selection  |
+|  G55  |  G55  |  G55  |  14   | Workpiece coordinate system 2 selection  |
+|  G56  |  G56  |  G56  |  14   | Workpiece coordinate system 3 selection  |
+|  G57  |  G57  |  G57  |  14   | Workpiece coordinate system 4 selection  |
+|  G58  |  G58  |  G58  |  14   | Workpiece coordinate system 5 selection  |
+|  G59  |  G59  |  G59  |  14   | Workpiece coordinate system 6 selection  |
+|  G65  |  G65  |  G65  |  00   | Macro calling                            |
+|  G66  |  G66  |  G66  |  12   | Macro modal call                         |
+|  G67  |  G67  |  G67  |  12   | Macro modal call cancel                  |
+|  G68  |  G68  |  G68  |  04   | Mirror image for double turrets ON       |
+|  G69  |  G69  |  G69  |  04   | Mirror image for double turrets OFF      |
+|  G70  |  G70  |  G72  |  00   | Finishing cycle                          |
+|  G71  |  G71  |  G73  |  00   | Stock removal in turning                 |
+|  G72  |  G72  |  G74  |  00   | Stock removal in facing                  |
+|  G73  |  G73  |  G75  |  00   | Pattern repeating                        |
+|  G74  |  G74  |  G76  |  00   | End face peck drilling                   |
+|  G75  |  G75  |  G77  |  00   | Outer diameter/internal diameter         |
+|       |       |       |       | drilling                                 |
+|  G76  |  G76  |  G78  |  00   | Multiple threading cycle                 |
+|  G80  |  G80  |  G80  |  10   | Canned cycle for drilling cancel         |
+|  G83  |  G83  |  G83  |  10   | Cycle for face drilling                  |
+|  G84  |  G84  |  G84  |  10   | Cycle for face tapping                   |
+|  G86  |  G86  |  G86  |  10   | Cycle for face boring                    |
+|  G87  |  G87  |  G87  |  10   | Cycle for side drilling                  |
+|  G88  |  G88  |  G88  |  10   | Cycle for side tapping                   |
+|  G89  |  G89  |  G89  |  10   | Cycle for side boring                    |
+|  G90  |  G77  |  G20  |  01   | Outer diameter/internal diameter cutting |
+|       |       |       |       | cycle                                    |
+|  G92  |  G78  |  G21  |  01   | Thread cutting cycle                     |
+|  G94  |  G79  |  G24  |  01   | Endface turning cycle                    |
+|  G96  |  G96  |  G96  |  02   | Constant surface speed control           |
+|  G97  |  G97  |  G97  |  02   | Constant surface speed control cancel    |
+|  G98  |  G94  |  G94  |  05   | Per minute feed                          |
+|  G99  |  G95  |  G95  |  05   | Per revolution feed                      |
+|   –   |  G90  |  G90  |  03   | Absolute programming                     |
+|   –   |  G91  |  G91  |  03   | Incremental programming                  |
+|   –   |  G98  |  G98  |  11   | Return to initial level                  |
+|   –   |  G99  |  G99  |  11   | Return to R point level                  |
++-------+-------+-------+-------+------------------------------------------+
